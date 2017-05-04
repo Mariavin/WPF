@@ -55,14 +55,14 @@ namespace WindowsFormsApp
             //класс работающий с базой данных 
             SqlConnection con = new SqlConnection(stringConnection);            
             con.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO [Events] (Event name,Adress,Date) VALUES ('" + textBox1.Text + "'" + textBox2.Text + "'" + dateTimePicker2.Value.Date+"');", con);
+            SqlCommand cmd = new SqlCommand("INSERT INTO [Events] (Event name,Adress,Date) VALUES (@Event name,@Adress,@Date);", con);
             //cmd.Parameters.AddWithValue("@Event name", textBox1.Text);
             //cmd.Parameters.AddWithValue("@Adress", textBox2.Text);
             //cmd.Parameters.AddWithValue("@Date", dateTimePicker2.Value.Date);
             DataTable tab = new DataTable();
             //tab.Load(cmd.ExecuteReader());
             dataGridView1.DataSource = tab.DefaultView;
-            con.Close();
+            con.Close(); 
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
