@@ -38,7 +38,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.YellowGreen;
-            this.button1.Location = new System.Drawing.Point(62, 66);
+            this.button1.Location = new System.Drawing.Point(63, 66);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(134, 36);
             this.button1.TabIndex = 0;

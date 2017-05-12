@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using WindowsFormsApp.Models;
 
 namespace WindowsFormsApp.Forms
 {
@@ -28,7 +28,9 @@ namespace WindowsFormsApp.Forms
         {
             dataGridView1.Visible = true;
 
-            dataGridView1.DataSource = Class.MembersTradeUnion.GetStudents().DefaultView;
+            //dataGridView1.DataSource = Class.MembersTradeUnion.GetStudents().DefaultView;
+            var students = UnionRepository.GetListOfStudents();
+            dataGridView1.DataSource = UnionConverter.StudentsListToTable(students).DefaultView;
 
             button5.Visible = true;
             button3.Visible = true;
@@ -43,16 +45,20 @@ namespace WindowsFormsApp.Forms
             label4.Visible = true;
             label5.Visible = true;
             label6.Visible = true;
-            textBox1.Visible = true;
-            textBox2.Visible = true;
-            textBox3.Visible = true;
-            textBox4.Visible = true;
-            textBox5.Visible = true;
-            textBox6.Visible = true;
+            textBox1.Visible = true; // lastname
+            textBox2.Visible = true; // firstname
+            textBox3.Visible = true; // fathername
+            textBox4.Visible = true; // faculty
+            textBox5.Visible = true; // group
+            textBox6.Visible = true; // id
             button5.Visible = true;
             button6.Visible = true;
 
-            Class.MembersTradeUnion.UpdateStudent(textBox2.Text, textBox1.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text);
+            //Class.MembersTradeUnion.UpdateStudent(textBox2.Text, textBox1.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text);
+            var student = UnionRepository.GetStudentById(Convert.ToInt32(textBox6.Text));
+            var newStudent = new Student(0, textBox2.Text, textBox1.Text, textBox3.Text, student.Login,
+            student.Password, textBox4.Text, textBox5.Text);
+            UnionRepository.UpdateStudent(student, newStudent);
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -69,7 +75,9 @@ namespace WindowsFormsApp.Forms
             button5.Visible = true;
             button6.Visible = true;
 
-            Class.MembersTradeUnion.AddStudent(textBox2.Text, textBox1.Text, textBox3.Text, textBox4.Text, textBox5.Text);
+            //Class.MembersTradeUnion.AddStudent(textBox2.Text, textBox1.Text, textBox3.Text, textBox4.Text, textBox5.Text);
+            UnionRepository.AddStudent(new Student(0, textBox2.Text, textBox1.Text, textBox3.Text, "Login", "Password",
+                textBox4.Text, textBox5.Text));
 
         }
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -101,7 +109,8 @@ namespace WindowsFormsApp.Forms
             button5.Visible = true;
             button6.Visible = true;
 
-            Class.MembersTradeUnion.DeleteStudent(textBox6.Text);
+            //Class.MembersTradeUnion.DeleteStudent(textBox6.Text); 
+            UnionRepository.DeleteStudentById(Convert.ToInt32(textBox6.Text));
         }
     }
 }

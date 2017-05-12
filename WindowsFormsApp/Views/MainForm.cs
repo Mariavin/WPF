@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp.Models;
 
 namespace WindowsFormsApp.Forms
 {
@@ -18,8 +19,8 @@ namespace WindowsFormsApp.Forms
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 newForm = new Form1();
-            newForm.Show();
+            /*Form1 newForm = new Form1(new Student());
+            newForm.Show();*/
         }
 
         private void button2_Click(object sender, EventArgs e)
